@@ -42,8 +42,8 @@ namespace Assignment1_Fall2020
             {
                 int i, j, n; // creating 3 variables
                 n = x; // Ensuring variables x and n are equal as we are calling n
-                // Console.WriteLine("Enter number of rows for triangle: "); // Enter the number of rows you would like for a triangle
-                // x = Convert.ToInt32(Console.ReadLine()); // read and process the input from the previous WriteLine statement
+                Console.WriteLine("Enter number of rows for triangle: "); // Enter the number of rows you would like for a triangle
+                x = Convert.ToInt32(Console.ReadLine()); // read and process the input from the previous WriteLine statement
                 
                 for (j = 1; j <= x; j++) // for everytime j is smaller than or equal to x (input), go through the loop in the bottom, and add one to j after and continue the loop till j is larger than x
                 {
@@ -52,7 +52,7 @@ namespace Assignment1_Fall2020
                     n--; // subtract a space from every line
                     for (i = 1; i <= 2 * j - 1; i++) // this determines the number of *'s in each line (starting with 1, when each line increases, you compute 2*j-1 to determine the number of stars)
                         Console.Write("*"); // Computes the stars
-                    Console.WriteLine(); // Prints 
+                    Console.WriteLine(); // Print
                 }
                 Console.ReadLine();
             }
@@ -67,12 +67,12 @@ namespace Assignment1_Fall2020
             try
             {
                 int sum = 0;
-                // Console.WriteLine("Input series number: "); // if we needed to take users input into value n2:
-                // n2 = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Input series number: "); // if we needed to take users input into value n2:
+                n2 = Convert.ToInt32(Console.ReadLine());
                 Console.Write("The odd numbers are: "); // prints out odd numbers from input value n2
-                for (int i = 1; i <= n2; i++) // Let i start at 1. If i is smaller than or equal to n2, go through the next statement
+                for (int i = 1; i <= n2; i++) // We are creating a loop where i starts at 1 to the value of n2
                 {
-                    Console.Write(" "+ (2 * i - 1)); // print out all odd numbers of input starting with 1 
+                    Console.Write(" "+ (2 * i - 1)); // print out all odd numbers of input by multiplying the number input by 2 and deducting 1
                     sum = sum + 2 * i - 1; // sum all the odd values from previous statement
                 }
             Console.WriteLine("\nThe sum is: " + sum); // print out the sum
@@ -88,10 +88,9 @@ namespace Assignment1_Fall2020
         {
             try
             {
-                return increasing(n) || decreasing(n); // return if it is monotonically increasing OR monotonically decreasing
                 bool increasing(int[] n) // Using a boolean to determine whether it is increasing 
                 {
-                    for (int i = 0; i < n.Length - 1; i++) // starting i at index 0, till i is smaller than index length, process the next statement
+                    for (int i = 0; i < n.Length - 1; i++) // we are creating a loop where i runs from 0 to value of length of array n
                         if (n[i] > n[i + 1]) // if index 0 is larger than index 1, then it is not increasing monotonically, however if not, continue by adding 1 to i until we reach all the values in the array. If it is continuously increasing per value, then print true
                             return false; // thus we print false if it is not increasing monotonically
                     return true; // otherwise, we print true if it is increasing monotonically
@@ -104,6 +103,7 @@ namespace Assignment1_Fall2020
                             return false; // thus we print false if it is not decreasing monotonically
                     return true; // otherwise, we print true if it is decreasing monotonically
                 }
+                return increasing(n) || decreasing(n); // return if it is monotonically increasing OR monotonically decreasing
             }
             catch
             {
@@ -118,17 +118,19 @@ namespace Assignment1_Fall2020
         {
             try
             {
+                int count = 0;
                 
-                for (int i = 0; i < J.Length; i++) // starting i at index 0, till i is smaller than length of the array, process the next statement
+                for (int i = 0; i < J.Length; i++) // Pick the array element and checking against every other array element
                 {
-                    for (int j = i + 1; j < J.Length; j++) // loop through all values and compare it with i
+                    for (int m = i + 1; m < J.Length; m++) // loop through all values and compare it with i
                     {
-                        if (J[j] == k - J[i]) // if the difference of array index position I and J is equal to the difference k
+                        if (Math.Abs(J[m] - J[i]) == k)  // if the difference of array index position i and m is equal to k
                         {
-                            return new int[] { i, j }; // return the number of pairs that result in that
+                            count++; // if the difference is equal to the target, increment count by 1 as a pair is found
                         }
                     }
                 }
+                return count; // return the count
             }
             catch
             {
@@ -141,19 +143,19 @@ namespace Assignment1_Fall2020
         {
             try
             {
-                char[] chars = keyboard.ToCharArray(); // put all inputs into characters
-                int[] countArray = new int[26]; // 
-                for (int i = 0; i < countArray.Length; i++)
+                char[] chars = keyboard.ToCharArray(); // creating character array for the keyboard
+                int[] countArray = new int[26]; // limiting the array to 26 characters as there are 26 letters
+                for (int i = 0; i < countArray.Length; i++) // Let i start at the first character. If i is smaller than or equal to the length, go through the next statement
                 {
-                    countArray[chars[i] - 'a'] = i;
+                    countArray[chars[i] - 'a'] = i; // eliminating all characters before value a in ASCII table 
                 }
 
                 int result = 0, position = 0; // our finger starts at index 0
-                char[] charsWord = word.ToCharArray();
-                for (int i = 0; i < charsWord.Length; i++)
+                char[] charsWord = word.ToCharArray(); // creating character array for the word
+                for (int i = 0; i < charsWord.Length; i++) // traversing through the word by calculating its length
                 {
-                    result = result + Math.Abs(countArray[charsWord[i] - 'a'] - position);
-                    position = countArray[charsWord[i] - 'a'];
+                    result = result + Math.Abs(countArray[charsWord[i] - 'a'] - position); // adding the differences between characters
+                    position = countArray[charsWord[i] - 'a']; // eliminating all characters before value a in ASCII table
                 }
                 return result;
             }
@@ -175,7 +177,7 @@ namespace Assignment1_Fall2020
                 str2 = Console.ReadLine(); // reads user input as string 2
                 int a = str1.Length; // let a = string 1's length
                 int b = str2.Length; // let b = string 2's length
-                int[,] c = new int[a + 1, b + 1]; // let c = array 
+                int[,] c = new int[a + 1, b + 1]; // creating integer array c that has the size equivalent to sum of a and b
 
                 if (a == 0) // if the length of string 1 is equal to 0
                 {
@@ -185,14 +187,14 @@ namespace Assignment1_Fall2020
                 {
                     return a; // return string 1's length
                 }
-                for (int i = 0; i<=a; c[i,0] = i++) { } // 
-                for (int j = 0; j<=b; c[0,j] = j++) { }
-                for (int i = 1; i<=a; i++)
+                for (int i = 0; i<=a; c[i,0] = i++) { }  // if first characters are same, ignore those characters and perform recursion on remaining string
+                for (int j = 0; j<=b; c[0,j] = j++) { }  // if last characters are same, ignore those characters and perform recursion on remaining string
+                for (int i = 1; i<=a; i++) // Starting the nested forloop for traversing the two strings to calculate the cost of operation
                 {
-                    for (int j = 1; j<=b; j++)
+                    for (int j = 1; j<=b; j++) 
                     {
-                        int cost = (str2[j - 1] == str1[i - 1]) ? 0 : 1;
-                        c[i, j] = Math.Min(Math.Min(c[i - 1, j] + 1, c[i, j - 1] + 1), c[i - 1, j - 1] + cost); // finding the minimum of all three functions (insert, remove and replace)
+                        int cost = (str2[j - 1] == str1[i - 1]) ? 0 : 1; // is the statement is true, return 0. Otherwise return 1
+                        c[i, j] = Math.Min(Math.Min(c[i - 1, j] + 1, c[i, j - 1] + 1), c[i - 1, j - 1] + cost); // finding the minimum cost of choosing the order in which the three functions are executed (insert, remove and replace)
                     }
                 }
                 return c[a, b];
