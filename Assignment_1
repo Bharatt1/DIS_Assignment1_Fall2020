@@ -48,7 +48,7 @@ namespace Assignment1_Fall2020
                 for (j = 1; j <= x; j++) // for everytime j is smaller than or equal to x (input), go through the loop in the bottom, and add one to j after and continue the loop till j is larger than x
                 {
                     for (i = 1; i < n; i++) // if j is smaller than or equal to n(input), compute this
-                        Console.Write(" "); // this creates spaces in lines prior to *'s
+                        Console.Write(" "); // this creates spaces
                     n--; // subtract a space from every line
                     for (i = 1; i <= 2 * j - 1; i++) // this determines the number of *'s in each line (starting with 1, when each line increases, you compute 2*j-1 to determine the number of stars)
                         Console.Write("*"); // Computes the stars
